@@ -2,124 +2,82 @@
 <html>
 
 <head>
-  <title>Filter</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
-  <!-- jQuery lib -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <!-- jPList lib -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.core.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jplist/5.2.0/js/jplist.bootstrap-filter-dropdown.min.js"></script>
-  <script>
-    $('document').ready(function() {
-      $('#demo').jplist({
-        itemsBox: '.list',
-        itemPath: '.list-item',
-        panelPath: '.jplist-panel'
-      });
-
-    });
-  </script>
-  <style media="screen">
-    .list-item {
+    <title>Filter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
+    <!-- jQuery lib -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- filter lists -->
+    <script src="/main.js"></script>
+    <style media="screen">
+    .list-item,
+    #list-item-like {
       background: #f1f1f1;
       padding: 20px;
       margin: 20px 0;
     }
-    .jplist-panel {
-      margin: 35px 0;
-    }
-    .jplist-panel button {
-      margin-right: 5px;
-    }
-  </style>
+    </style>
 </head>
 
 <body>
-
-  <div class="container">
-
-    <!-- demo -->
-    <div id="demo">
-
-      <!-- panel -->
-      <div class="jplist-panel">
+    <div class="container">
         <div class="row">
-          <div class="col-sm-12">
-            <!-- bootstrap filter dropdown control -->
-            <div class="dropdown pull-left" data-control-type="boot-filter-drop-down" data-control-name="category-filter" data-control-action="filter">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="dropdown-menu-1" aria-expanded="true">
-               <span data-type="selected-text">Filter by category</span>
-               <span class="caret"></span>
-             </button>
-
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-menu-1">
-                <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="#" data-path=".architecture">Architecture</a>
-                </li>
-                <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="#" data-path=".nature">Nature</a>
-                </li>
-              </ul>
+            <!--
+              Please note that each div.dropdown has data-filter-by with a value of the filter name(all lowercase, only letters).
+              The span.dropdown-text has data-default-text with the same value as the content
+              this text is displayed when filter is emptied. -->
+            <div class="dropdown" data-filter-by="category">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="dropdown-text" data-default-text="Cateogry">Category</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#" data-filter-by="all">Show all</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" data-filter-by="architecture">Architecture</a></li>
+                    <li><a href="#" data-filter-by="nature">Nature</a></li>
+                </ul>
             </div>
-
-            <!-- Location filter dropdown control -->
-            <div class="dropdown pull-left" data-control-type="boot-filter-drop-down" data-control-name="category-filter" data-control-action="filter">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="dropdown-menu-2" aria-expanded="true">
-            <span data-type="selected-text">Filter by Location</span>
-            <span class="caret"></span>
-         </button>
-
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-menu-2">
-                <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="#" data-path=".orlando">Orlando</a>
-                </li>
-                <li role="presentation">
-                  <a role="menuitem" tabindex="-1" href="#" data-path=".ocala" data-default="true">Ocala</a>
-                </li>
-              </ul>
+            <div class="dropdown" data-filter-by="location">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="dropdown-text" data-default-text="Location">Location</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <li><a href="#" data-filter-by="all">Show all</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#" data-filter-by="orlando">Orlando</a></li>
+                    <li><a href="#" data-filter-by="ocala">Ocala</a></li>
+                </ul>
             </div>
-
-
-
-          </div>
         </div>
-      </div>
-
-      <!-- HTML data -->
-      <div class="list">
-
-        <!-- item 1 -->
-        <div class="list-item">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="title architecture orlando">Architecture</p>
-                <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often
-                  identified with their surviving architectural achievements.</p>
-              </div>
+        <!-- demo -->
+        <div id="demo">
+            <!-- HTML data -->
+            <div class="list">
+                <!--
+                  Please note that each filterable item has data-filter-values
+                  with an array that is inside singlue quotes and each array item
+                  that the list item can be found by is within double quotes. -->
+                <!-- item 1 -->
+                <div class="list-item" data-filter-values='["category-architecture", "location-orlando"]'>
+                    <h3 class="title">Architecture</h3>
+                    <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.</p>
+                </div>
+                <!-- item 2 -->
+                <div class="list-item" data-filter-values='["category-nature", "location-ocala"]'>
+                    <h3 class="title">Autumn</h3>
+                    <p class="desc">Autumn or Fall is one of the four temperate seasons. Autumn marks the transition from summer into winter, in September (Northern Hemisphere) or March (Southern Hemisphere) when the arrival of night becomes noticeably earlier. The equinoxes might be expected to be in the middle of their respective seasons, but temperature lag (caused by the thermal latency of the ground and sea) means that seasons appear later than dates calculated from a purely astronomical perspective.</p>
+                </div>
+                <!-- Please not the #list-item-like which will be displayed when there is nothing to show. -->
+                <div id="list-item-like" style="display: none">
+                  <h3>None items found</h3>
+                  <p class="desc">Please try changing the filters to find something.</p>
+                </div>
             </div>
-          </div>
         </div>
-
-        <!-- item 2 -->
-        <div class="list-item">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="title ocala nature">Autumn</p>
-                <p class="desc">Autumn or Fall is one of the four temperate seasons. Autumn marks the transition from summer into winter, in September (Northern Hemisphere) or March (Southern Hemisphere) when the arrival of night becomes noticeably earlier. The equinoxes
-                  might be expected to be in the middle of their respective seasons, but temperature lag (caused by the thermal latency of the ground and sea) means that seasons appear later than dates calculated from a purely astronomical perspective.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
     </div>
-  </div>
 </body>
 
 </html>
