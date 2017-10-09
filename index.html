@@ -2,82 +2,257 @@
 <html>
 
 <head>
-    <title>Filter</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
-    <!-- jQuery lib -->
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <!-- filter lists -->
-    <script src="/main.js"></script>
-    <style media="screen">
+  <title>Filter</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css" />
+  <!-- jQuery lib -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <!-- filter lists -->
+  <script src="main.js"></script>
+  <style media="screen">
+    body {
+      background: #F1F1F1;
+    }
+
     .list-item,
     #list-item-like {
-      background: #f1f1f1;
+      background: #fff;
       padding: 20px;
       margin: 20px 0;
     }
-    </style>
+
+    .dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .dropdown-menu p {
+      padding: 3px 20px;
+      margin: 0 0 5px 0;
+    }
+
+    .dropdown-menu li.title {
+      margin: 10px 0;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      min-width: 250px;
+      padding: 5px 0;
+      margin: 0;
+      font-size: 16px;
+      text-align: left;
+      list-style: none;
+      background-color: #0077C0;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      border: none;
+      border: none;
+      border-radius: 0;
+      -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+      color: #fff;
+    }
+
+    .dropdown-menu>li>a {
+      display: block;
+      padding: 3px 20px;
+      clear: both;
+      font-weight: 400;
+      line-height: 1.42857143;
+      color: #fff;
+      white-space: nowrap;
+      transition: .3s;
+    }
+
+    .dropdown-menu>li>a:hover,
+    .dropdown-menu>li>a:focus {
+      color: #fff;
+      background-color: #048DE1;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      filter: none;
+      background-repeat: repeat-x;
+    }
+
+    .dropdown-menu .divider {
+      height: 1px;
+      margin: 9px 0;
+      overflow: hidden;
+      background-color: #0381ce;
+    }
+
+    .dropdown-text {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .btn-default {
+      width: 100%;
+      text-shadow: none;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      background-image: none;
+      filter: none;
+      filter: none;
+      background-repeat: repeat-x;
+      border-color: #fff;
+      box-shadow: none;
+      padding: 15px;
+      color: #333;
+      transition: .3s;
+    }
+
+    .btn-default:hover,
+    .btn-default:focus {
+      background-color: #0077C0;
+      background-position: 0;
+      border-radius: 0;
+      border-color: #0077C0;
+      color: #fff;
+    }
+
+    .btn-default:hover,
+    .btn-default:focus,
+    .btn-default.focus,
+    .btn-default:active,
+    .btn-default.active,
+    .open>.dropdown-toggle.btn-default {
+      color: #fff;
+      background-color: #0077C0;
+      border-color: #0077C0;
+      border-radius: 0;
+    }
+
+    .caret {
+      display: none;
+    }
+
+    .dropdown-text:after {
+      content: "\f078";
+      font-family: FontAwesome;
+      position: relative;
+      margin-left: 5px;
+      bottom: 2px;
+      font-size: 10px;
+      color: #D8D8D8;
+    }
+
+    .filter-nav {
+      display: flex;
+      background: #fff;
+      border-radius: 4px;
+      max-width: 560px;
+    }
+    .filter-nav > :last-child .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <!--
+  <div class="container">
+    <div class="row">
+      <!--
               Please note that each div.dropdown has data-filter-by with a value of the filter name(all lowercase, only letters).
               The span.dropdown-text has data-default-text with the same value as the content
               this text is displayed when filter is emptied. -->
-            <div class="dropdown" data-filter-by="category">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="dropdown-text" data-default-text="Cateogry">Category</span>
+      <div class="filter-nav">
+        <div class="dropdown" data-filter-by="date">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="dropdown-text" data-default-text="Date">Date</span>
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#" data-filter-by="all">Show all</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#" data-filter-by="architecture">Architecture</a></li>
-                    <li><a href="#" data-filter-by="nature">Nature</a></li>
-                </ul>
-            </div>
-            <div class="dropdown" data-filter-by="location">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <span class="dropdown-text" data-default-text="Location">Location</span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a href="#" data-filter-by="all">Show all</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#" data-filter-by="orlando">Orlando</a></li>
-                    <li><a href="#" data-filter-by="ocala">Ocala</a></li>
-                </ul>
-            </div>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#" data-filter-by="all">Show all</a></li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <p><b>Summer Camps:</b> May - Aug</p>
+            </li>
+            <li><a href="#" data-filter-by="june26">June 26-30</a></li>
+            <li><a href="#" data-filter-by="july5">July 5-7</a></li>
+            <li><a href="#" data-filter-by="july8">July 8th</a></li>
+            <li class="title"><a href="#" data-filter-by="fallcamps"><b>Fall Camps:</b> September</a></li>
+            <li class="title"><a href="#" data-filter-by="wintercamps"><b>Winter Camps:</b> December</a></li>
+          </ul>
         </div>
-        <!-- demo -->
-        <div id="demo">
-            <!-- HTML data -->
-            <div class="list">
-                <!--
+        <div class="dropdown" data-filter-by="facility">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="dropdown-text" data-default-text="Facility">Facility</span>
+                    <span class="caret"></span>
+                </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <li><a href="#" data-filter-by="all">Show all</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" data-filter-by="reccenter">Orange County Rec Center</a></li>
+            <li><a href="#" data-filter-by="holyfamily">Holy Family Catholic School-II</a></li>
+            <li><a href="#" data-filter-by="rdv">RDV Sportsplex-II</a></li>
+          </ul>
+        </div>
+        <div class="dropdown" data-filter-by="time">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="dropdown-text" data-default-text="Time">Time</span>
+                    <span class="caret"></span>
+                </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+            <li><a href="#" data-filter-by="all">Show all</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" data-filter-by="9-4">9am-4pm</a></li>
+            <li><a href="#" data-filter-by="9-1">9am-1pm</a></li>
+            <li><a href="#" data-filter-by="4-8">4pm-8pm</a></li>
+          </ul>
+        </div>
+        <div class="dropdown" data-filter-by="county">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="dropdown-text" data-default-text="County">County</span>
+                    <span class="caret"></span>
+                </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu4">
+            <li><a href="#" data-filter-by="all">Show all</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" data-filter-by="orange">Orange County</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+      <!-- HTML data -->
+      <div class="list">
+        <!--
                   Please note that each filterable item has data-filter-values
                   with an array that is inside singlue quotes and each array item
                   that the list item can be found by is within double quotes. -->
-                <!-- item 1 -->
-                <div class="list-item" data-filter-values='["category-architecture", "location-orlando"]'>
-                    <h3 class="title">Architecture</h3>
-                    <p class="desc">Architecture is both the process and product of planning, designing and construction. Architectural works, in the material form of buildings, are often perceived as cultural symbols and as works of art. Historical civilizations are often identified with their surviving architectural achievements.</p>
-                </div>
-                <!-- item 2 -->
-                <div class="list-item" data-filter-values='["category-nature", "location-ocala"]'>
-                    <h3 class="title">Autumn</h3>
-                    <p class="desc">Autumn or Fall is one of the four temperate seasons. Autumn marks the transition from summer into winter, in September (Northern Hemisphere) or March (Southern Hemisphere) when the arrival of night becomes noticeably earlier. The equinoxes might be expected to be in the middle of their respective seasons, but temperature lag (caused by the thermal latency of the ground and sea) means that seasons appear later than dates calculated from a purely astronomical perspective.</p>
-                </div>
-                <!-- Please not the #list-item-like which will be displayed when there is nothing to show. -->
-                <div id="list-item-like" style="display: none">
-                  <h3>None items found</h3>
-                  <p class="desc">Please try changing the filters to find something.</p>
-                </div>
-            </div>
+        <!-- item 1 -->
+        <div class="list-item" data-filter-values='["date-june26", "facility-reccenter", "time-9-4", "county-orange"]'>
+          <h3 class="date">June 26-30</h3>
+          <p class="facility">Orange County Rec Center - Goldenrod</p>
+          <p class="address">4863 N Goldenrod Rd.</p>
         </div>
+
+        <div class="list-item" data-filter-values='["date-july5", "facility-rdv", "time-4-8", "county-orange"]'>
+          <h3 class="date">July 5-7</h3>
+          <p class="facility">TNBA/Magic Challenge - RDV Sportsplex</p>
+          <p class="address">8701 Maitland Summit Blvd.</p>
+        </div>
+
+        <!-- Please not the #list-item-like which will be displayed when there is nothing to show. -->
+        <div id="list-item-like" style="display: none">
+          <h3>None items found</h3>
+          <p class="desc">Please try changing the filters to find something.</p>
+        </div>
+      </div>
     </div>
+
 </body>
 
 </html>
