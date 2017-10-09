@@ -21,7 +21,7 @@ $(function() {
     var target = $(e.target);
     var filterCat = e.target.parentNode.parentNode.parentNode.dataset.filterBy;
     var filterItem = e.target.dataset.filterBy;
-    var parentFilter = target.parent().parent().prev().children().first();
+    var parentFilter = target.parent().parent().parent().find('.dropdown-text');
     // remove previous filter item if exists
     for (var length = currentlyFilteredBy.length, index = 0; index < length; index++) {
       var itemFilter = currentlyFilteredBy[index];
